@@ -33,8 +33,8 @@ const router = new VueRouter({
             component: Posts
         },
         {
-            //posts/cicciobello
-            path: '/posts/:slug', // equivale a Laravel: Route::get('/posts/{slug}', 'Api\PostController@show');
+            
+            path: '/posts/:slug',
             name: 'single-post',
             component: SinglePost
         },
