@@ -1,18 +1,22 @@
 <template>
-<!-- vista in front di vue -->
   <div>
-     <Main/>
+      <Header/>
+      <Main/>
+      <Footer/>
   </div>
 </template>
 
 <script>
- import Main from '../components/Main';
+import Main from '../components/Main';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 export default {
-  name: 'App',
-  components: {
-    Main,
-      
-  }
+    name: 'App',
+    components: {
+        Main,
+        Header,
+        Footer
+    }
 }
 </script>
 
