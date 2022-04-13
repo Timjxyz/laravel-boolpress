@@ -5,20 +5,26 @@
 
       <div class="row">
         <div class="col-6" v-for="post in posts" :key="post.id">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">{{ post.title }}</h5>
-              <p class="card-text">{{ post.content }}</p>
-              <a href="#" class="btn btn-primary">Vedi articolo completo</a>
-            </div>
-          </div>
+
+            <Post
+                :title='post.title'
+                :content='post.content'
+                :slug='post.slug'
+                :category='post.category'
+                :tags='post.tags'
+            />
+
         </div>
       </div>
 
       <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item" :class="(currentPage == 1)?'disabled':''" ><span class="page-link" @click="getPosts(currentPage - 1)">Precedente</span></li>
-            <li class="page-item" :class="(currentPage == lastPage)?'disabled':''"><span class="page-link" @click="getPosts(currentPage + 1)">Successivo</span></li>
+        <ul class="pagination mt-3">
+            <li class="page-item" :class="(currentPage == 1)?'disabled':''" >
+              <span class="page-link" @click="getPosts(currentPage - 1)">Precedente</span>
+            </li>
+            <li class="page-item mx-2" :class="(currentPage == lastPage)?'disabled':''">
+              <span class="page-link" @click="getPosts(currentPage + 1)">Successivo</span>
+            </li>
         </ul>
     </nav>
 
@@ -27,8 +33,12 @@
 </template>
 
 <script>
+import Post from '../components/Post';
 export default {
-  name: "Main",
+  name: "Posts",
+  components: {
+      Post
+  },
   data() {
     return {
       posts: [],
@@ -38,7 +48,7 @@ export default {
   },
   methods: {
     getPosts(apiPage) {
-      axios.get("/api/posts", {
+      axios.get("/api/posts", { 
           'params': {
               'page': apiPage
           }

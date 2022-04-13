@@ -2,33 +2,43 @@
   <nav class="navbar navbar-expand navbar-light bg-light">
     <a class="navbar-brand" href="#">Boolpress</a>
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <router-link class="nav-link" :to="{name: 'home'}">Home</router-link>
-            </li>
-            <li class="nav-item">
-                <router-link class="nav-link" :to="{name: 'about'}">About us</router-link>
-            </li>
-            <li class="nav-item">
-                <router-link class="nav-link" :to="{name: 'contact'}">Contacts</router-link>
-            </li>
-            <li class="nav-item">
-                <router-link class="nav-link" :to="{name: 'posts'}">Posts</router-link>
+            <li class="nav-item" v-for="menuItem in menuItems" :key="menuItem.routeName">
+                <router-link class="nav-link" :to="{name: menuItem.routeName}">{{menuItem.label}}</router-link>
             </li>
         </ul>
-
         <ul class="navbar-nav ms-auto">
             <li class="nav-item">
                 <a class="nav-link" href="/admin">Accesso Admin</a>
             </li>
         </ul>
-
-
     </nav>
 </template>
 
 <script>
 export default {
-    name: 'Header'
+    name: 'Header',
+    data() {
+        return {
+            menuItems: [
+                {
+                    routeName: 'home',
+                    label: 'Home'
+                },
+                {
+                    routeName: 'about',
+                    label: 'About Us'
+                },
+                {
+                    routeName: 'contact',
+                    label: 'Contacts'
+                },
+                {
+                    routeName: 'blog',
+                    label: 'Blog'
+                },
+            ]
+        }
+    }
 }
 </script>
 
