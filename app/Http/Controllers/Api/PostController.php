@@ -13,10 +13,18 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
         $posts = Post::with(['category', 'tags'])->paginate(2);
+
+            $posts->each(function($post){
+                if($post->cover){
+                    $post->cover= url('storage/'.$post->cover);
+                }else{
+                    $post->cover =url('img/fallback_img.png');
+                }
+            });
 
         return response()->json(
             [
@@ -24,12 +32,20 @@ class PostController extends Controller
                 'success' => true
             ]
         );
+
     }
-    
+
+
     public function show($slug)
     {
 
-        $post = Post::where('slug', '=', $slug)->with(['category', 'tags'])->first();
+        $post = Post::where('slug', $slug)->with(['category', 'tags'])->first();
+
+        if ($post->cover) {
+            $post->cover = url('storage/'.$post->cover);
+        } else {
+            $post->cover = url('img/fallback_img.png');
+        }
 
         if ($post) {
             return response()->json(
@@ -46,6 +62,6 @@ class PostController extends Controller
                 ]
             );
         }
-    }
 
+    }
 }

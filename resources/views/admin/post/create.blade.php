@@ -7,9 +7,15 @@
 
                 <h1>Crea un nuovo post</h1>
 
-                <form method="POST" action={{route('admin.posts.store')}}>
+                <form method="POST" action={{route('admin.posts.store')}}  enctype="multipart/form-data">
 
                     @csrf
+                    {{-- Campo per invio dei file --}}
+                    <div class="form-group">
+                        <label for="image" >Carica immagine di copertina</label>
+                        <input type="file" class="form-control" name="image" id="image">
+                    </div>
+
 
                     {{-- Sezione delle varie categorie di alimenti --}}
                     <div class="form-group">

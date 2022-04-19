@@ -7,10 +7,21 @@
 
                 <h1>Modifica post:  {{$post->title}}</h1>
 
-                <form method="POST" action={{route('admin.posts.update', $post->id)}}>
+                <form method="POST" action={{route('admin.posts.update', $post->id)}}  enctype="multipart/form-data">
 
                     @csrf
                     @method('PUT')
+                    {{-- modifica del file img --}}
+                    @if ($post->cover)
+                        <p>Immagine attuale</p>
+                        <img class="img-thumbnail" src="{{asset('storage/' . $post->cover)}}" alt="{{$post->title}}">
+                    @endif
+
+                    <div class="form-group">
+                        <label for="image">Carica nuova immagine di copertina</label>
+                        <input class="form-control" type="file" name="image" id="image">
+                    </div>
+
                     {{-- Sezione delle varie categorie di alimenti --}}
                     <div class="form-group">
                         <label for="category_id">Categoria</label>
